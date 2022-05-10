@@ -15,7 +15,7 @@ GlassWare Save File or GWSF is a file format used by GlassWare to save and load 
 
 | Language   	| supported 	|
 |------------	|-----------	|
-| python     	| NO       	|
+| python     	| BETA      	|
 | C#         	| NO        	|
 | C/C++      	| NO        	|
 | JAVA       	| NO        	|

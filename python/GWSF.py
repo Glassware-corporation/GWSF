@@ -1,5 +1,9 @@
 
+from this import d
+
+
 _version_ = "0.1.1"
+in_ex = False
 
 def getGWSFValue(GWSF_file_path, VAR_NAME):
     try:
@@ -9,9 +13,39 @@ def getGWSFValue(GWSF_file_path, VAR_NAME):
     
     for line in GWSF_file:
         if line.startswith(VAR_NAME):
-            Value = line.split("-")[1].strip() 
-            Value = Value.split("ENDL")[0].strip()
-            return Value
+            VALUE_TYPE = line.split("-")[1].strip()
+            if VALUE_TYPE == 'S' or VALUE_TYPE == 's':
+                VALUE = line.split("\"")[1]
+                VALUE = VALUE.split("\"")[0]
+                return str(VALUE)
+            elif VALUE_TYPE == 'I' or VALUE_TYPE == 'i':
+                VALUE = line.split("-")[2]
+                VALUE = VALUE.split("ENDL")[0]
+                return int(VALUE)
+            if in_ex == True:
+                if VALUE_TYPE == 'B' or VALUE_TYPE == 'b':
+                    VALUE = line.split("-")[2]
+                    VALUE = VALUE.split("ENDL")[0]
+                    if VALUE != True or VALUE != False:
+                        print(VALUE)
+                        raise Exception("VALUE is NOT \"True\" or \"False\"")
+                    return VALUE
+
+def changeGWSFValue(GWSF_file_path, VAR_NAME, NEW_VALUE):
+    try:
+        GWSF_file = open(GWSF_file_path)
+    except:
+        raise Exception("GWSF file not found")
+
+    for line in GWSF_file:
+        if line.startswith(VAR_NAME):
+            VALUE_TYPE = line.split("-")[1].strip()
+            print(line)
+            if VALUE_TYPE == "I" or VALUE_TYPE == "i":
+                
+                pass
+            pass
+        pass
     pass
 
 def main():
